@@ -1,0 +1,39 @@
+# macOS
+.DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.log
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.out
+*.snm
+*.synctex
+*.run.xml
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+*.xmpi
+
+# Generated document in the repository root
+/paper.pdf
+
+# Editor/project files
+.vscode/
+.idea/
