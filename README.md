@@ -12,6 +12,16 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error paper.tex
 
 The output is `paper.pdf`. Replace the placeholder title, authors, affiliations, abstract, links, figures, and section text before submission.
 
+## Chinese Papers
+
+Chinese papers use a separate entry point and section files so they remain independent from the English template:
+
+```bash
+latexmk -xelatex -interaction=nonstopmode -halt-on-error paper_zh.tex
+```
+
+Edit `paper_zh.tex`, the files in `sections/zh/`, and `main_zh.bib`. The Chinese entry point uses the Fandol fonts bundled with TeX Live through `xeCJK`; the existing `paper.tex`, `sections/`, and `main.bib` remain the English version and continue to use pdfLaTeX.
+
 ## Layouts
 
 Single-column is the default:

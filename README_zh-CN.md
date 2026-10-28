@@ -12,6 +12,16 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error paper.tex
 
 编译结果为 `paper.pdf`。正式使用前，请替换标题、作者、单位、摘要、链接、图片和章节中的占位文本。
 
+## 中文论文
+
+中文论文使用单独的入口文件和章节目录，与英文模板分开维护：
+
+```bash
+latexmk -xelatex -interaction=nonstopmode -halt-on-error paper_zh.tex
+```
+
+请编辑 `paper_zh.tex`、`sections/zh/` 下的章节以及 `main_zh.bib`。中文入口通过 `xeCJK` 使用 TeX Live 自带的 Fandol 字体；现有 `paper.tex`、`sections/` 和 `main.bib` 仍是英文版本，继续使用 pdfLaTeX。
+
 ## 单栏与双栏
 
 默认使用单栏：
@@ -75,10 +85,13 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error paper.tex
 ## 目录结构
 
 - `paper.tex`：主文档入口和论文元信息。
+- `paper_zh.tex`：中文论文入口；使用 XeLaTeX 编译。
 - `hust.cls`：主题色、版式、标题块、作者信息和页面样式。
 - `sections/`：论文各章节及示例。
+- `sections/zh/`：中文论文各章节及示例。
 - `assets/`：字体、Logo、图标和其他资源。
 - `main.bib`：BibTeX 参考文献数据库。
+- `main_zh.bib`：中文论文独立使用的 BibTeX 数据库。
 - `LICENSE`：MIT 许可证。
 
 ## 版权与致谢

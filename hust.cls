@@ -5,11 +5,17 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{hust}
 \LoadClassWithOptions{article}
-\pdfoutput=1
+\RequirePackage{iftex}
+\ifPDFTeX
+  \pdfoutput=1
+\fi
 
 % Layout
 \RequirePackage[top=2.75cm, bottom=2.5cm, left=2.5cm, right=2.5cm, columnsep=0.65cm]{geometry}
 \RequirePackage{microtype}
+\ifXeTeX
+  \microtypesetup{protrusion=false}
+\fi
 \RequirePackage{placeins}
 \RequirePackage{hyphenat}
 \RequirePackage{setspace}
@@ -19,7 +25,9 @@
 \RequirePackage{etoolbox}
 \RequirePackage{fancyhdr}  % custom headers/footers
 \RequirePackage{ulem}  % 引用下划线
-\DisableLigatures[f]{family=sf*}
+\ifPDFTeX
+  \DisableLigatures[f]{family=sf*}
+\fi
 \RequirePackage{graphicx}
 \RequirePackage{subcaption}
 
@@ -107,18 +115,25 @@
 \captionsetup[sub]{singlelinecheck=true,format=custom,labelsep=custom,font=small}
 
 
-\RequirePackage[T1]{fontenc}
-\DeclareFontFamily{T1}{bytesans}{}
-\DeclareFontShape{T1}{bytesans}{m}{n}{<-> s * [1] assets/bytesans}{}
-\pdfmapline{+bytesans < assets/ByteSans-Bold.ttf <T1-WGL4.enc}
-\renewcommand{\sfdefault}{bytesans}%
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \DeclareFontFamily{T1}{bytesans}{}
+  \DeclareFontShape{T1}{bytesans}{m}{n}{<-> s * [1] assets/bytesans}{}
+  \pdfmapline{+bytesans < assets/ByteSans-Bold.ttf <T1-WGL4.enc}
+  \renewcommand{\sfdefault}{bytesans}%
 
-
-\DeclareFontFamily{T1}{bytesansmedium}{}
-\DeclareFontShape{T1}{bytesansmedium}{m}{n}{<-> s*[1] assets/bytesansmedium}{}
-\pdfmapline{+bytesansmedium < assets/ByteSans-Medium.ttf <T1-WGL4.enc}
-%\renewcommand{\sfdefault}{bytesansmedium}%
-\renewcommand{\rmdefault}{cmr}
+  \DeclareFontFamily{T1}{bytesansmedium}{}
+  \DeclareFontShape{T1}{bytesansmedium}{m}{n}{<-> s*[1] assets/bytesansmedium}{}
+  \pdfmapline{+bytesansmedium < assets/ByteSans-Medium.ttf <T1-WGL4.enc}
+  \renewcommand{\rmdefault}{cmr}
+\else
+  \RequirePackage{fontspec}
+  \newfontfamily\bytesansmediumfont{ByteSans-Medium.ttf}[Path=assets/]
+  \setsansfont{ByteSans-Medium.ttf}[
+    Path=assets/,
+    BoldFont=ByteSans-Bold.ttf
+  ]
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -145,7 +160,11 @@
 {\fontsize{10}{12}\selectfont}
 
 \newcommand\affiliationlist{}
-\newcommand\affiliationformat[2][]{{\affiliationfont {\fontfamily{bytesansmedium}\selectfont $^{#1}$#2}}}
+\ifPDFTeX
+  \newcommand\affiliationformat[2][]{{\affiliationfont {\fontfamily{bytesansmedium}\selectfont $^{#1}$#2}}}
+\else
+  \newcommand\affiliationformat[2][]{{\affiliationfont {\bytesansmediumfont $^{#1}$#2}}}
+\fi
 \newcommand\affiliation[2][]{\addtolist[#1]{#2}{\affiliationlist}{\affiliationformat}{\par}}
 
 \newcommand{\contributionfont}
@@ -167,13 +186,15 @@
 \newcommand\checkdataformat[2][]{{\small {\sffamily\bfseries\color{hustred} #1:} {\color{hustgray}#2}}}
 \newcommand\checkdata[2][]{\addtolist[#1]{#2}{\checkdatalist}{\checkdataformat}{\par}}
 
+\newcommand{\hustcorrespondencelabel}{Correspondence}
+\newcommand{\hustreportlabel}{Technical Report}
 
 \newcommand{\abstractinfont}
 {\fontsize{10}{12}\selectfont}
 
 \renewcommand{\abstract}[1]{\def\abstractlist{{\abstractinfont #1}}}
 \renewcommand\date[1]{\checkdata[Date]{#1}}
-\newcommand\correspondence[1]{\checkdata[Correspondence]{#1}}
+\newcommand\correspondence[1]{\checkdata[\hustcorrespondencelabel]{#1}}
 
 
 \newcommand{\titlefont}
@@ -207,7 +228,7 @@
     \fancyhead[L]{
         \vskip -1mm
     \includegraphics[width=\hustlogowidth]{\hustlogo}\hspace{2.5mm}%
-    \raisebox{0.6ex}{\sffamily\fontsize{9}{11}\selectfont\color{hustblue}Technical Report}
+    \raisebox{0.6ex}{\sffamily\fontsize{9}{11}\selectfont\color{hustblue}\hustreportlabel}
     }
 
 }

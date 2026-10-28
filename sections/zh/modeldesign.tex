@@ -1,0 +1,34 @@
+\section{方法}
+
+介绍所提出的方法，使读者能够理解并复现核心思路。先概述整体流程，再按处理顺序说明各组成部分。
+
+\subsection{问题定义}
+
+定义输入、输出、假设和符号。例如，令 $x$ 表示输入，$y$ 表示目标输出，$f_\theta$ 表示待优化的模型或算法。说明任务属于监督、自监督、生成式、交互式还是分析型设置。
+
+\subsection{系统概览}
+
+\begin{figure}[t]
+  \centering
+  \templatefigure[0.95\linewidth]{方法概览占位图}
+  \caption{\textbf{方法概览。} 请替换为展示输入、主要模块和输出的流程图。}
+  \label{fig:method_overview}
+\end{figure}
+
+结合图~\ref{fig:method_overview} 说明系统的主要组成部分。本小节侧重整体概念，架构、损失函数和实现细节可放在后续小节。
+
+\subsection{核心模块}
+
+说明核心技术模块解决的问题、接收的信息以及产生的表示或预测。若使用神经网络，介绍骨干网络、条件信号和输出头；若使用其他方法，说明算法阶段和决策规则。
+
+\subsection{优化目标}
+
+给出训练或优化目标，并在公式之后立即定义各项：
+\begin{equation}
+  \mathcal{L} = \lambda_1 \mathcal{L}_{\mathrm{main}} + \lambda_2 \mathcal{L}_{\mathrm{reg}}.
+\end{equation}
+其中，$\mathcal{L}_{\mathrm{main}}$ 是主要任务损失，$\mathcal{L}_{\mathrm{reg}}$ 是可选的正则项。
+
+\subsection{实现细节}
+
+总结复现所需的实现选择，包括模型规模、优化器、学习率计划、批大小、硬件和预处理方式。较长的细节可移至附录。

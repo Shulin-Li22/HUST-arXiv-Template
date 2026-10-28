@@ -16,6 +16,10 @@
 *.ilg
 *.ind
 *.ist
+*.loa
+*.lof
+*.lol
+*.lot
 *.log
 *.maf
 *.mtc
@@ -33,6 +37,7 @@
 
 # Generated document in the repository root
 /paper.pdf
+/paper_zh.pdf
 
 # Editor/project files
 .vscode/

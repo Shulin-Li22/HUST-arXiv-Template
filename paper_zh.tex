@@ -1,0 +1,122 @@
+% 中文稿件独立入口。请使用 XeLaTeX 编译：
+% latexmk -xelatex -interaction=nonstopmode -halt-on-error paper_zh.tex
+\documentclass[twocolumn]{hust}
+
+\usepackage[toc,page,header]{appendix}
+\usepackage{minitoc}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{xeCJK}
+
+% 使用 TeX Live 自带的 Fandol 字体，避免依赖本机安装的中文字体。
+\setCJKmainfont{FandolSong-Regular.otf}[
+  BoldFont=FandolSong-Bold.otf
+]
+\setCJKsansfont{FandolHei-Regular.otf}[
+  BoldFont=FandolHei-Bold.otf
+]
+\setCJKmonofont{FandolFang-Regular.otf}
+\renewcommand{\hustcorrespondencelabel}{通讯作者}
+\renewcommand{\hustreportlabel}{技术报告}
+
+\addto{\captionsenglish}{%
+  \renewcommand{\contentsname}{目录}%
+  \renewcommand{\figurename}{图}%
+  \renewcommand{\tablename}{表}%
+  \renewcommand{\refname}{参考文献}%
+}
+\renewcommand{\beginabstract}{\abstractfont{\sffamily\bfseries\hustblue{摘要}\par}}
+\renewcommand{\beginappendix}{\appendix{\titlefont\sffamily\hustblue{附录}\par}}
+\algrenewcommand{\algorithmicrequire}{\sffamily\bfseries\color{hustblue}输入：}
+\algrenewcommand{\algorithmicensure}{\sffamily\bfseries\color{hustblue}输出：}
+
+\newcommand{\templatefigure}[2][0.95\linewidth]{%
+  \fbox{%
+    \begin{minipage}[c][0.28\linewidth][c]{#1}
+      \centering\sffamily\small
+      #2\\[0.6em]
+      请替换为正式图片或表格。
+    \end{minipage}%
+  }%
+}
+
+\title{论文标题：简洁概括核心贡献的副标题}
+
+\author[1]{第一作者\textsuperscript{*}}
+\author[1,2]{第二作者\textsuperscript{*}}
+\author[2]{第三作者}
+
+\affiliation[1]{华中科技大学 XXX 学院}
+\affiliation[2]{华中科技大学 YYY 学院}
+
+\email{author1@hust.edu.cn}
+\email{author2@hust.edu.cn}
+\email{author3@hust.edu.cn}
+\contribution{\textsuperscript{*} 共同第一作者}
+\correspondence{author1@hust.edu.cn}
+
+\abstract{
+请在此撰写中文摘要，简要说明研究问题、方法、主要贡献和实验结论。建议用后续句子补充核心技术思路、评估设置以及最重要的结果或发现。
+}
+
+\checkdata[资源链接]{%
+  \href{https://choucisan.github.io}{\raisebox{-1ex}{\includegraphics[height=4.2ex]{assets/internet-icon.pdf}}~项目主页}\hspace{2em}
+  \href{https://github.com/choucisan}{\raisebox{-1ex}{\includegraphics[height=4.2ex]{assets/github-logo.pdf}}~代码}\hspace{2em}
+  \href{https://huggingface.co/choucsan}{\raisebox{-1ex}{\includegraphics[height=4.2ex]{assets/hf-logo.pdf}}~模型}
+}
+
+\begin{document}
+\ifhusttwocolumn
+  \renewcommand{\hustfrontmatter}{%
+    \par\vskip 2mm
+    \centering
+    \templatefigure[0.92\textwidth]{论文概览占位图}
+    \captionof{figure}{\textbf{论文概览。} 请替换为论文的主要示意图、流程图或关键结果图。}
+    \label{fig:teaser}%
+  }
+\fi
+\maketitle
+\vspace{-1.1cm}
+
+\ifhusttwocolumn
+  \onecolumn
+  \vspace*{-1.1cm}
+  \begin{center}
+    \tableofcontents
+  \end{center}
+  \clearpage
+  \twocolumn
+\else
+  \begin{figure}[!htbp]
+    \centering
+    \templatefigure[0.98\linewidth]{论文概览占位图}
+    \caption{\textbf{论文概览。} 请替换为论文的主要示意图、流程图或关键结果图。}
+    \label{fig:teaser}
+  \end{figure}
+  \tableofcontents
+  \newpage
+\fi
+
+% 中文正文采用 1.5 倍行距；标题页和目录保持模板原有行距。
+\onehalfspacing
+
+\input{sections/zh/introduction}
+\input{sections/zh/modeldesign}
+\input{sections/zh/data}
+\input{sections/zh/modeltraining}
+\input{sections/zh/inference}
+\input{sections/zh/experiments}
+\input{sections/zh/application}
+\input{sections/zh/conclusion}
+
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{main_zh}
+
+\clearpage
+\beginappendix
+\input{sections/zh/appendix}
+
+\end{document}

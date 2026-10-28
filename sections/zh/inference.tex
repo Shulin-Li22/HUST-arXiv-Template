@@ -1,0 +1,29 @@
+\section{推理与部署}
+
+\subsection{推理流程}
+
+说明训练完成后模型或方法在测试阶段的使用方式，包括输入、预处理、解码或后处理步骤以及预期输出。如果推理过程与训练过程不同，请明确说明。
+
+\begin{algorithm}[t]
+  \caption{\textbf{推理流程示例。} 请替换为实际算法步骤。}
+  \label{alg:inference}
+  \begin{algorithmic}[1]
+    \Require 输入样本 $x$，训练完成的模型 $f_{\theta}$
+    \Ensure 预测结果 $\hat{y}$
+    \State $z \gets \textsc{Preprocess}(x)$
+    \State $s \gets f_{\theta}(z)$
+    \If{$\textsc{Confidence}(s) < \tau$}
+      \State $s \gets \textsc{Refine}(z, s)$
+    \EndIf
+    \State $\hat{y} \gets \textsc{Decode}(s)$
+    \State \Return $\hat{y}$
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{效率}
+
+在相关时报告运行时间、内存占用、模型大小或计算复杂度。比较多个方案时可使用表格。最终基准数据核实前，避免写入未经确认的结论。
+
+\subsection{实践注意事项}
+
+说明实际使用中的限制，例如输入分辨率、支持格式、批处理行为、失败情况或与下游工具的兼容性。
